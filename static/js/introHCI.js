@@ -2,6 +2,13 @@
 
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function() {
+	$("img.img").hide();
+	var projNum = 8;
+	for (var i = 1; i <=projNum; i++) {
+		$("#project"+ i).append("<div class='project-description'><p>Description of the project.</p></div>");
+		$(".project-description").hide();
+	}
+
 	initializePage();
 })
 
@@ -20,13 +27,11 @@ function initializePage() {
 
 function updateProject(e) {
 	var projectID = $('#project').val();
-	console.log(projectID);
 	$(projectID).animate({
 		width: $('#width').val()
 	});
 
 	var newText = $('#description').val();
-	console.log(newText);
 	$(projectID + " .project-description").text(newText);
 }
 
@@ -34,13 +39,10 @@ function projectClick(e) {
 	console.log("Project clicked");
 	//prevent the page from reloading
 	e.preventDefault();
-	console.log(this);
 
 	// In an event listener, $(this) is the element that fired the event
 	var projectTitle = $(this).find("p").text();
-	console.log(projectTitle);
 	var jumbotronHeader = $(".jumbotron h1");
-	console.log("Number of matching items: " + jumbotronHeader.length);
 	jumbotronHeader.text(projectTitle);
 
 	var containingProject = $(this).closest(".project");
@@ -48,11 +50,12 @@ function projectClick(e) {
 	var media = $(containingProject).find("img.img");
 	if (description.length == 0) {
 		$(containingProject).append("<div class='project-description'><p>Description of the project.</p></div>");
-	} else {
+	} 
+	else {
 		$(description).fadeToggle();
 		$(media).fadeToggle();
 	} 
-};	
+}
 
 
 	// Add any additional listeners here
